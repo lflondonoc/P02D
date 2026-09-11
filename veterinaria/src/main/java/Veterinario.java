@@ -39,8 +39,8 @@ public class Veterinario {
     //Mostrar la información del veterinario
     @Override
     public String toString() {
-        return "Veterinario: " +
-                "nombre: '" + nombre +
+        return
+                nombre +
                 ", numLicencia:" + numLicencia+
                 ", tipo de especialidad: "+tipoEspecialidad;
     }

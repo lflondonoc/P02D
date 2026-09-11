@@ -1,16 +1,16 @@
 public class Aplicacion {
 
     static void main() {
+
+        //Crear los objetos de mi clase propietario
+        Propietario alejandro= new Propietario("Alejandro", "12345", "aljandro@gmail.com");
+
+        //Crear los objetos de mi clase veterinario
+        Veterinario juan= new Veterinario("Juan Pablo", 456, TipoEspecialidad.NEUROLOGIA);
+
         //Crear los objetos de mi clase gato
         //Crear a Katty
-        Gato katty= new Gato("Katty", 12, "criolla", "hembra");
-        System.out.println(katty);
-
-        //Consultar el nombre de mi objeto Katty
-        System.out.println(katty.getNombre());
-
-        //Cambiemos el nombre de Katty
-        katty.setNombre("felix");
+        Gato katty= new Gato("Katty", 12, "criolla", "hembra", alejandro, juan);
         System.out.println(katty);
 
 

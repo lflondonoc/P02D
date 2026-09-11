@@ -39,9 +39,9 @@ public class Propietario {
     //Mostrar la información del propietario
     @Override
     public String toString() {
-        return "Propietario: " +
-                ", nombre='" + nombre +
-                ", telefono='" + telefono +
-                ", correo='" + correo;
+        return
+                nombre +
+                ", telefono: " + telefono +
+                ", correo: " + correo;
     }
 }
