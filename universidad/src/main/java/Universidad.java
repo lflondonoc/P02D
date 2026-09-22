@@ -91,6 +91,56 @@ public class Universidad {
                 ", lista de estudiantes: "+listaEstudiantes+
                 ", lista de cursos: "+listaCursos;
     }
+    //============Profesores============
+    //Método para verificar profesores
+    public boolean verificarProfesor (int documento){
+        boolean existe= false;
+        for(Profesor profesor: listaProfesores){
+            if(profesor.getDocumento()== documento){
+                existe= true;
+                break;
+            }
+        }
+        return existe;
+    }
+    //Método agregar profesor
+    public boolean agregarProfesor(Profesor profesor){
+        boolean agregado= false;
+        boolean existe= verificarProfesor(profesor.getDocumento());
+        if(existe==false){
+            listaProfesores.add(profesor);
+            agregado= true;
+        }
+        return agregado;
+    }
+    //Método actualizar profesor
+    public boolean actualizarProfesor (int documento, Profesor profesorActualizado){
+        boolean estaActualizado= false;
+        for (Profesor profesor: listaProfesores){
+            if(profesor.getDocumento() == documento){
+                profesor.setNombre(profesorActualizado.getNombre());
+                profesor.setEdad(profesorActualizado.getEdad());
+                profesor.setSalario(profesorActualizado.getSalario());
+                estaActualizado= true;
+                break;
+            }
+        }
+        return estaActualizado;
+    }
+    //Método eliminar profesor
+    public boolean eliminarProfesor(int documento){
+        boolean esEliminado= false;
+        for(Profesor profesor: listaProfesores){
+            if(profesor.getDocumento()==documento){
+                listaProfesores.remove(profesor);
+                esEliminado=true;
+                break;
+            }
+        }
+        return esEliminado;
+    }
+
+    //===========Estudiantes============
     //Método para verificar estudiantes
     public boolean verificarEstudiantes (int documentoIdentidad){
         boolean existe= false;
@@ -113,26 +163,5 @@ public class Universidad {
         }
         return agregado;
     }
-    //Método para verificar profesores
-    public boolean verificarProfesor (int documento){
-        boolean existe= false;
-        for(Profesor profesor: listaProfesores){
-            if(profesor.getDocumento()== documento){
-                existe= true;
-                break;
-            }
-        }
-        return existe;
-    }
 
-    //Método agregar estudiantes
-    public boolean agregarProfesor(Profesor profesor){
-        boolean agregado= false;
-        boolean existe= verificarProfesor(profesor.getDocumento());
-        if(existe==false){
-            listaProfesores.add(profesor);
-            agregado= true;
-        }
-        return agregado;
-    }
 }
