@@ -1,29 +1,30 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class Cliente {
-    private String nombre;
+
+    private String nombreCompleto;
     private String documento;
     private String telefono;
     private String correo;
 
-    private List<Compra> listaCompras;
+    private LinkedList<Compra> compras;
 
-    public Cliente(String nombre, String documento, String telefono, String correo) {
-        this.nombre = nombre;
+    public Cliente(String nombreCompleto, String documento, String telefono, String correo) {
+
+        this.nombreCompleto = nombreCompleto;
         this.documento = documento;
         this.telefono = telefono;
         this.correo = correo;
 
-        listaCompras= new ArrayList<>();
+        compras = new LinkedList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     public String getDocumento() {
@@ -50,20 +51,40 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public List<Compra> getListaCompras() {
-        return listaCompras;
+    public LinkedList<Compra> getCompras() {
+        return compras;
     }
 
-    public void setListaCompras(List<Compra> listaCompras) {
-        this.listaCompras = listaCompras;
+    // Verificar si ya existe una compra
+    public boolean verificarCompra(String codigo) {
+        boolean existe = false;
+        for (Compra compra : compras) {
+            if (compra.getCodigo().equals(codigo)) {
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
+    // Agregar compra
+    public boolean agregarCompra(Compra compra) {
+        boolean agregado = false;
+        boolean existe = verificarCompra(compra.getCodigo());
+        if (existe == false) {
+            compras.add(compra);
+            agregado = true;
+        }
+        return agregado;
     }
 
     @Override
     public String toString() {
-        return  "nombre: " + nombre +
-                ", documento: " + documento +
-                ", telefono: " + telefono +
-                ", correo: " + correo +
-                ", listaCompras: " + listaCompras;
+
+        return "Nombre completo: " + nombreCompleto +
+                "\nDocumento: " + documento +
+                "\nTeléfono: " + telefono +
+                "\nCorreo: " + correo +
+                "\nCantidad de compras: " + compras.size();
     }
 }

@@ -1,4 +1,4 @@
-public enum CategoriaProducto {
+public enum Categoria {
     ALIMENTOS,
     BEBIDAS,
     PRODUCTOS_ASEO,

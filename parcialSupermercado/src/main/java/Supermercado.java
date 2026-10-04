@@ -1,32 +1,34 @@
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Supermercado {
-    private String nombre;
+
+    private String nombreComercial;
     private String direccion;
     private String telefono;
 
-    private List<Cliente> listaClientes;
-    private List<Producto> listaProductos;
-    private List<Compra> listaCompras;
+    private LinkedList<Cliente> clientes;
+    private LinkedList<Producto> productos;
+    private LinkedList<Compra> compras;
 
-    public Supermercado(String nombre, String direccion, String telefono) {
-        this.nombre = nombre;
+
+    public Supermercado(String nombreComercial, String direccion, String telefono) {
+        this.nombreComercial = nombreComercial;
         this.direccion = direccion;
         this.telefono = telefono;
 
-        listaClientes= new LinkedList<>();
-        listaProductos= new LinkedList<>();
-        listaCompras= new ArrayList<>();
+        clientes = new LinkedList<>();
+        productos = new LinkedList<>();
+        compras = new LinkedList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+
+    public String getNombreComercial() {
+        return nombreComercial;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreComercial(String nombreComercial) {
+        this.nombreComercial = nombreComercial;
     }
 
     public String getDireccion() {
@@ -45,97 +47,112 @@ public class Supermercado {
         this.telefono = telefono;
     }
 
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
+    public LinkedList<Cliente> getClientes() {
+        return clientes;
     }
 
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
+    public LinkedList<Producto> getProductos() {
+        return productos;
     }
 
-    public List<Producto> getListaProductos() {
-        return listaProductos;
+    public LinkedList<Compra> getCompras() {
+        return compras;
     }
 
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
+    // ==========================
+    // CLIENTES
+    // ==========================
 
-    public List<Compra> getListaCompras() {
-        return listaCompras;
-    }
-
-    public void setListaCompras(List<Compra> listaCompras) {
-        this.listaCompras = listaCompras;
-    }
-    //======Clientes=======
-    public boolean verificarCliente(String documento){
-        boolean existeCliente= false;
-        for (Cliente cliente: listaClientes){
-            if(cliente.getDocumento().equals(documento)){
-                existeCliente= true;
+    public boolean verificarCliente(String documento) {
+        boolean existe = false;
+        for(Cliente cliente : clientes) {
+            if(cliente.getDocumento().equals(documento)) {
+                existe = true;
                 break;
             }
         }
-        return existeCliente;
-    }
-    public boolean agregarCliente(Cliente cliente){
-        boolean clienteAgregado= false;
-        boolean existeCliente= verificarCliente(cliente.getDocumento());
-        if (!existeCliente){
-            listaClientes.add(cliente);
-            clienteAgregado=true;
-        }
-        return clienteAgregado;
+        return existe;
     }
 
-    //=====Productos=======
-    public boolean verificarProducto(String codigo){
-        boolean existeCliente= false;
-        for (Producto producto: listaProductos){
-            if(producto.getCodigo().equals(codigo)){
-                existeCliente= true;
+    public boolean agregarCliente(Cliente cliente) {
+        boolean agregado = false;
+        boolean existe = verificarCliente(cliente.getDocumento());
+        if(existe == false) {
+            clientes.add(cliente);
+            agregado = true;
+        }
+        return agregado;
+    }
+
+    // ==========================
+    // PRODUCTOS
+    // ==========================
+    public boolean verificarProducto(String codigo) {
+        boolean existe = false;
+        for(Producto producto : productos) {
+            if(producto.getCodigo().equals(codigo)) {
+                existe = true;
                 break;
             }
         }
-        return existeCliente;
+        return existe;
     }
-    public boolean agregarProducto(Producto producto){
-        boolean productoAgregado= false;
-        boolean existeProducto= verificarProducto(producto.getCodigo());
-        if (!existeProducto){
-            listaProductos.add(producto);
-            productoAgregado=true;
+
+    public boolean agregarProducto(Producto producto) {
+        boolean agregado = false;
+        boolean existe = verificarProducto(producto.getCodigo());
+        if(existe == false) {
+            productos.add(producto);
+            agregado = true;
         }
-        return productoAgregado;
+        return agregado;
     }
-    //======Compras========
-    public boolean verificarCompra(String codigo){
-        boolean existeCompra= false;
-        for (Compra compra: listaCompras){
-            if(compra.getCodigo().equals(codigo)){
-                existeCompra= true;
+
+    // ==========================
+    // COMPRAS
+    // ==========================
+    public boolean verificarCompra(String codigo) {
+        boolean existe = false;
+        for(Compra compra : compras) {
+            if(compra.getCodigo().equals(codigo)) {
+                existe = true;
                 break;
             }
         }
-        return existeCompra;
+        return existe;
     }
-    public boolean agregarCompra(Compra compra){
-        boolean compraAgregado= false;
-        boolean existeCompra= verificarCompra(compra.getCodigo());
-        if (!existeCompra){
-            listaCompras.add(compra);
-            compraAgregado=true;
+
+    public boolean agregarCompra(Compra compra) {
+        boolean agregado = false;
+        boolean existe = verificarCompra(compra.getCodigo());
+        if(existe == false) {
+            compras.add(compra);
+            agregado = true;
         }
-        return compraAgregado;
+        return agregado;
     }
+
+    // ==========================
+    // REPORTES
+    // ==========================
+    public double calcularVentasFecha(LocalDate fecha) {
+        double total = 0;
+        for(Compra compra : compras) {
+            if(compra.getFecha().equals(fecha)) {
+                total += compra.getValorTotal();
+            }
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "Supermercado: '" + nombre +
-                ", direccion: " + direccion +
-                ", telefono: " + telefono +
-                ", listaClientes: " + listaClientes +
-                ", listaProductos: " + listaProductos +
-                ", listaCompras: " + listaCompras;
+
+        return "Supermercado: " + nombreComercial +
+                "\nDirección: " + direccion +
+                "\nTeléfono: " + telefono +
+                "\nClientes registrados: " + clientes.size() +
+                "\nProductos registrados: " + productos.size() +
+                "\nCompras registradas: " + compras.size();
     }
 }

@@ -1,5 +1,5 @@
 public enum MetodoPago {
     TARJETA,
-    TRANSFERENCIA,
+    TRANSFERENCIA_BANCARIA,
     EFECTIVO
 }
