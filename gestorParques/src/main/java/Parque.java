@@ -82,4 +82,12 @@ public class Parque {
         valorTotalParque += municipio.getSobreCosto();
         return valorTotalParque;
     }
+
+    @Override
+    public String toString() {
+        return "Parque: " + nombre +
+                ", descripcion: " + descripcion +
+                ", municipio: " + municipio +
+                ", listaZonas: " + listaZonas;
+    }
 }

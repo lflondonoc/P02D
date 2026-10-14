@@ -48,4 +48,12 @@ public class Zona {
         double valorZona= figuraGeometrica.calcularArea()*material.getValorMetroCuadrado();
         return valorZona;
     }
+
+    @Override
+    public String toString() {
+        return "Zona: " + nombre +
+                ", tipoZona: " + tipoZona +
+                ", material: " + material +
+                ", figuraGeometrica: " + figuraGeometrica;
+    }
 }
