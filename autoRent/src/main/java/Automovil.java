@@ -19,4 +19,10 @@ public class Automovil extends Vehiculo{
         double tarifa= (TARIFA+20000)*dias;
         return tarifa;
     }
+
+    @Override
+    public String toString() {
+        return "Automovil: "+super.toString()+
+                ", número de puertas: "+numeroPuertas;
+    }
 }
